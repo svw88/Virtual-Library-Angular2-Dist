@@ -7,7 +7,7 @@ var methodOverride = require('method-override');
 var fs = require('fs');
 
 // configuration =================
-
+app.set('port', (process.env.PORT || 5000));
 app.use(express.static(path.join(__dirname, 'dist')));
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -22,9 +22,9 @@ app.use(bodyParser.json({
 // parse application/vnd.api+json as json
 app.use(methodOverride());
 
-// listen (start app with node server.js) ======================================
-app.listen(8080);
-console.log("App listening on port 8080");
+
+app.listen(app.get('port'));
+console.log("App listening");
 
 // method to get favorites.json and pass it to app.js
 app.get('/favoritesList', function(req, res) {
